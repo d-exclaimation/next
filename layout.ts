@@ -20,9 +20,7 @@ export function meta(meta: Metadata) {
 
 type LayoutProps<P extends {} | undefined = undefined> = {
   children: ReactNode;
-} & P extends undefined
-  ? {}
-  : { params: P };
+} & (P extends undefined ? {} : { params: P });
 
 /**
  * Declare a Next.js Layout component that can be used to create a layout in the new App router.
