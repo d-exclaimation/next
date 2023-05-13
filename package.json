@@ -1,0 +1,73 @@
+{
+  "name": "@d-exclaimation/next",
+  "author": "d-exclaimation",
+  "version": "0.1.0",
+  "description": "Next.js App router utility",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d-exclaimation/next.git"
+  },
+  "bugs": {
+    "url": "https://github.com/d-exclaimation/next/issues"
+  },
+  "homepage": "https://github.com/d-exclaimation/next#readme",
+  "keywords": [
+    "typescript",
+    "nextjs",
+    "next",
+    "nextjs app router",
+    "rsc",
+    "react server components",
+    "react"
+  ],
+  "type": "module",
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs",
+      "types": "./lib/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "tsconfig.json",
+    "README.md",
+    "LICENSE",
+    "**/package.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "prepublish": "pnpm build",
+    "build": "tsup --format cjs,esm --treeshake --splitting --dts",
+    "lint": "tsc"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.6",
+    "next": "^13.4.2",
+    "react": "^18.2.0",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "tsup": {
+    "entry": {
+      "index": "index.ts"
+    },
+    "outDir": "lib",
+    "clean": true,
+    "treeshake": true,
+    "splitting": true
+  }
+}
