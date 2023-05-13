@@ -1,7 +1,7 @@
 {
   "name": "@d-exclaimation/next",
   "author": "d-exclaimation",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Next.js App router utility",
   "license": "MIT",
   "repository": {
@@ -30,6 +30,11 @@
       "import": "./lib/index.js",
       "require": "./lib/index.cjs",
       "types": "./lib/index.d.ts"
+    },
+    "./client": {
+      "import": "./lib/client.js",
+      "require": "./lib/client.cjs",
+      "types": "./lib/client.d.ts"
     },
     "./package.json": "./package.json"
   },
@@ -64,7 +69,8 @@
   },
   "tsup": {
     "entry": {
-      "index": "index.ts"
+      "index": "index.ts",
+      "client": "client/index.ts"
     },
     "outDir": "lib",
     "clean": true,

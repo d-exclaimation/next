@@ -1,4 +1,3 @@
-export * from "./action";
 export * from "./component";
 export * from "./error";
 export * from "./layout";
