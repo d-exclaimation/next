@@ -55,3 +55,34 @@ export function route<P extends {} | undefined = undefined>(
 ) {
   return fn;
 }
+
+/**
+ * Declare a Next.js Middleware handler that can be used to create a middleware in the new App router.
+ *
+ * Use `middleware` to declare a function that matches Next.js `middleware.ts` requirements.
+ *
+ * ### Example
+ *
+ * ```ts
+ * import { NextResponse } from "next/server";
+ * import { middleware } from "@d-exclaimation/next";
+ *
+ * export const middleware = middleware(async (req) => {
+ *   return NextResponse.redirect(new URL('/home', request.url));
+ * });
+ *
+ * export const config = {
+ *   matcher: '/about/:path*',
+ * };
+ * ```
+ *
+ * @public
+ *
+ * @param fn The function that will be called when the middleware is matched
+ * @returns The function that will be called when the middleware is matched
+ */
+export function middleware(
+  fn: (req: NextRequest) => Response | Promise<Response>
+) {
+  return fn;
+}
