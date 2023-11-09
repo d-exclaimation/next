@@ -16,8 +16,18 @@ declare global {
  *
  * ```ts
  * import { PrismaClient } from "@prisma/client";
+ * import { Redis } from "@upstash/redis";
+ * import { Kafka } from "@upstash/kafka";
  *
- * export const prisma = excl("prisma", () => new PrismaClient());
+ * // Named instance
+ * export const prisma = one(() => new PrismaClient(), "prisma");
+ *
+ * // Anonymous instance
+ * export const redis = one(() => new Redis());
+ *
+ * // Use function name instance
+ * const _kafka = () => new Kafka();
+ * export const kafka = one(_kafka);
  * ```
  *
  * @public
@@ -26,15 +36,21 @@ declare global {
  * @param value Value to store
  * @returns The instance
  */
-export function excl<K extends string | symbol | number, T>(
-  key: K,
-  value: () => T
+export function one<T>(value: () => T): T;
+export function one<K extends string | symbol | number, T>(
+  value: () => T,
+  key: K
+): T;
+export function one<K extends string | symbol | number, T>(
+  value: () => T,
+  key?: K
 ): T {
-  const instance = (globalThis?.instances?.[key] as T) ?? value();
+  const _key = key ?? (value.name || new Date().getTime().toString());
+  const instance = (globalThis?.instances?.[_key] as T) ?? value();
 
   if (process?.env?.NODE_ENV === "development") {
     globalThis.instances ??= {};
-    globalThis.instances[key] ??= instance;
+    globalThis.instances[_key] ??= instance;
   }
 
   return instance;
